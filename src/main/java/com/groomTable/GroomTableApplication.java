@@ -8,7 +8,6 @@ public class GroomTableApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GroomTableApplication.class, args);
-		System.out.printf("hello, world");
 	}
 
 }
