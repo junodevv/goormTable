@@ -1,4 +1,4 @@
-package com.groomTable.member.entity;
+package com.goormTable.member.entity;
 
 public class Member {
 }

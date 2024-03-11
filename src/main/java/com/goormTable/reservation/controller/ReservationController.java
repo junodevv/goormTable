@@ -1,4 +1,4 @@
-package com.groomTable.reservation.controller;
+package com.goormTable.reservation.controller;
 
 public class ReservationController {
 }

@@ -1,4 +1,4 @@
-package com.groomTable.member.dto;
+package com.goormTable.member.dto;
 
 public class MemberDto {
 }

@@ -1,4 +1,4 @@
-package com.groomTable.member.service;
+package com.goormTable.member.service;
 
 public class MemberService {
 }

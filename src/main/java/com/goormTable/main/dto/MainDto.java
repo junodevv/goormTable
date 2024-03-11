@@ -1,4 +1,4 @@
-package com.groomTable.main.dto;
+package com.goormTable.main.dto;
 
 public class MainDto {
 }

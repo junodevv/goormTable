@@ -1,4 +1,4 @@
-package com.groomTable.main.service;
+package com.goormTable.main.service;
 
 public class MainService {
 }

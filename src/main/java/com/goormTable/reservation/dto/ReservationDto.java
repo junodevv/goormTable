@@ -1,4 +1,4 @@
-package com.groomTable.reservation.dto;
+package com.goormTable.reservation.dto;
 
 public class ReservationDto {
 }

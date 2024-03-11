@@ -1,4 +1,4 @@
-package com.groomTable.main.entity;
+package com.goormTable.main.entity;
 
 public class Main {
 }

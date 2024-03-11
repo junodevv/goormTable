@@ -1,4 +1,4 @@
-package com.groomTable.main.controller;
+package com.goormTable.main.controller;
 
 public class MainController {
 }

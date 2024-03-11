@@ -1,4 +1,4 @@
-package com.groomTable.member.controller;
+package com.goormTable.member.controller;
 
 public class MemberController {
 }
