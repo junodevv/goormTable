@@ -1,4 +1,4 @@
-package com.groomTable.common.config;
+package com.goormTable.common.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
