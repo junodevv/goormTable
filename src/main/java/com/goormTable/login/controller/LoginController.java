@@ -18,12 +18,14 @@ public class LoginController {
     @Operation(summary = "로그인", description = "사용자 로그인을 처리합니다.")
     @PostMapping("/login")
     public ResponseEntity login(@RequestParam String id, @RequestParam String password) {
-        //ToDO 로그인 처리 로직 작성 필요
-
         return ResponseEntity.ok(loginService.chkAdmin(id,password));
     }
 
-//    public ResponseEntity insMember(String[] args) {
-//
-//    }
+    //TODO 마스터계정만 멤버(가게사장님)를 등록할수 있게 필요
+    @PostMapping("/insMem")
+    public ResponseEntity insMem(String[] args) {
+
+        return ResponseEntity.ok(true);
+    }
+
 }

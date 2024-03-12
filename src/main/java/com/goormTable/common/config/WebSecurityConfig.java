@@ -19,8 +19,9 @@ public class WebSecurityConfig {
                 )
                 .authorizeHttpRequests((autorizeRequests) ->
                         autorizeRequests
-                                .requestMatchers(PathRequest.toH2Console()).permitAll()
-                                .requestMatchers("/","/login/**").permitAll()
+                                .requestMatchers("/","/index.html","/login/**").permitAll()
+                                //TODO swagger-ui 경로는 마스터계정(개발자)만 들어갈수 있도록 처리 필요
+                                .requestMatchers("/swagger-ui/**","/swagger-ui.html", "/v3/api-docs/**", "/swagger-resources/**").permitAll()
                                 .requestMatchers("/user").hasRole(Role.USER.name())
                                 .requestMatchers("/admin").hasRole(Role.ADMIN.name())
                                 .anyRequest().authenticated()
