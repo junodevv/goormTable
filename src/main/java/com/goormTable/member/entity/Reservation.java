@@ -17,25 +17,27 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "ReservationTable")
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reserve_seq", nullable = false, unique = true)
-    private Long reserveSeq; // PK, 예약 시퀀스
+    private Integer reserveSeq; // PK, 예약 시퀀스
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "reservation_time")
     private LocalDateTime reservationTime; // 예약한 시간날짜
 
     @Column(name = "people_num")
-    private int peopleNum; // 인원수
+    private Integer peopleNum; // 인원수
 
     @Column(name = "phone_num")
     private String phoneNum; // 전화번호
@@ -43,8 +45,8 @@ public class Reservation {
     @Column(name = "extra")
     private String extra; // 추가 요청사항
 
-    @Enumerated(EnumType.STRING)
-    private Status status; // 상태
+//    @Enumerated(EnumType.STRING)
+    private String status; // 상태
 
     @ManyToOne
     @JoinColumn(name = "member_seq", referencedColumnName = "member_seq")
