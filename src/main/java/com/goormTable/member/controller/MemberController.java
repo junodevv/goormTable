@@ -33,17 +33,8 @@ public class MemberController {
     @Operation(summary = "대기중 손님 수 조회", description = "대기중인 손님의 수를 반환합니다.")
     @GetMapping("/waitingCnt") // watingCnt?company_id=null
     public Integer waitingCnt(@RequestParam("company_id") String companyId){
-        // ToDo 대기 중인 손님 수 반환 로직
-        log.info("company_id={}", companyId);
-        return 11;
-    }
 
-    @GetMapping("/test") // admin?company_id&day
-    public String test(
-            @RequestParam("company_id") String companyId,
-            @RequestParam("day") @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") LocalDateTime day
-            ){
-        return "companyId=" + companyId + "time= " + day;
+        return memberService.getCountByMember(companyId);
     }
 }
 

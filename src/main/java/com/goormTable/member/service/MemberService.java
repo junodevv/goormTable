@@ -4,6 +4,7 @@ import com.goormTable.member.dto.MemberDto;
 import com.goormTable.member.dto.ReservationDto;
 import com.goormTable.member.entity.Member;
 import com.goormTable.member.entity.Reservation;
+import com.goormTable.member.entity.Status;
 import com.goormTable.member.repository.member.MemberRepository;
 import com.goormTable.member.repository.reservation.ReservationRepository;
 import java.time.LocalDateTime;
@@ -41,5 +42,9 @@ public class MemberService {
 
 
     // Todo : 현재 대기인원 조회
-    // 1-2. memberSeq와 현재날짜(Date)와 Status로 예약 손님 Count
+    public Integer getCountByMember(String companyId){
+        Integer memberSeq = findMemberSeqByCompanyId(companyId);
+        // 1-2. memberSeq와 현재날짜(Date)와 Status로 예약 손님 Count
+        return reservationRepository.getCountByMemberAndStatus(memberSeq, Status.waitAndCall());
+    }
 }
