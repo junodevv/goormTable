@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="login") //사용하지 않으면 클래스 이름이 테이블 이름이 됨
+@Table(name="MemberTable") //사용하지 않으면 클래스 이름이 테이블 이름이 됨
 @Getter
 @Setter
 @Builder
@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 public class Login {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seq", nullable = false, unique = true)
+    @Column(name = "member_seq", nullable = false, unique = true)
     private Long seq;
-    @Column(name="adminId") //어드민 아이디
+    @Column(name="admin_id") //어드민 아이디
     private String adminId;
     @Column(name="password") //패스워드
     private String password;
