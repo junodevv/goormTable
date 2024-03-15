@@ -1,12 +1,10 @@
 package com.goormTable.member.service;
 
-import com.goormTable.member.dto.MemberDto;
 import com.goormTable.member.dto.ReservationDto;
-import com.goormTable.member.entity.Member;
-import com.goormTable.member.entity.Reservation;
 import com.goormTable.member.entity.Status;
 import com.goormTable.member.repository.member.MemberRepository;
 import com.goormTable.member.repository.reservation.ReservationRepository;
+import com.goormTable.member.util.DateTimeTransfer;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,13 +27,15 @@ public class MemberService {
     }
 
     // Todo : 날짜별 예약 손님 조회
-    public List<ReservationDto> findAllByCompanyIdAndDay(String companyId, LocalDateTime day){
+    public List<ReservationDto> findAllByCompanyIdAndDay(String companyId, String day){
+        // day를 LocalDateTime으로 변환
+        LocalDateTime dateTimeOfDay = DateTimeTransfer.dayParseLocalDateTime(day);
         Integer memberSeq = findMemberSeqByCompanyId(companyId);
         // 1-1. memberSeq와 Date로 예약 손님 목록 조회 및 반환
         List<ReservationDto> reservationDtos =
-                reservationRepository.findByMemberAndDate(memberSeq, day)
+                reservationRepository.findByMemberAndDate(memberSeq, dateTimeOfDay)
                 .stream()
-                .map(reservation -> ReservationDto.toDto(reservation))
+                .map(ReservationDto::toDto)
                 .collect(Collectors.toList());
         return reservationDtos;
     }

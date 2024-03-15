@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReservationRepository {
 
-    List<Reservation> findByMemberAndDate(Integer memberSeq, LocalDateTime day);
+    List<Reservation> findByMemberAndDate(Integer memberSeq, LocalDateTime dateTimeOfDay);
 
     Integer getCountByMemberAndStatus(Integer memberSeq, List<String> statuses);
 }

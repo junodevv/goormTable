@@ -4,16 +4,12 @@ import com.goormTable.member.dto.ReservationDto;
 import com.goormTable.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @Tag(name = "MemberController", description = "손님(조회) 관련 API")
 @RestController
 @RequiredArgsConstructor
@@ -25,7 +21,7 @@ public class MemberController {
     @GetMapping("/admin") // admin?company_id=null&day=null
     public List<ReservationDto> findListByDate(
             @RequestParam("company_id") String companyId,
-            @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") LocalDateTime day
+            @RequestParam String day
     ){
         return memberService.findAllByCompanyIdAndDay(companyId, day);
     }
