@@ -17,5 +17,6 @@ public class MemberDto {
     private String adminId;
     private String password;
     private String adminYn;
+    private String companyId;
     private LocalDateTime reg_time;
 }

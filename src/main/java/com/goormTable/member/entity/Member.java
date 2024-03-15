@@ -7,17 +7,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 
 @Entity
 @Table(name = "MemberTable")
 @Getter
 @Setter
 @ToString
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
@@ -31,6 +29,9 @@ public class Member {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name="company_id") //고객사별 식별자
+    private String companyId;
 
     @Column(name = "admin_yn")
     private String adminYn;
