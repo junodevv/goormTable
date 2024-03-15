@@ -1,6 +1,6 @@
 package com.goormTable.login.dto;
 
-import com.goormTable.login.entity.Login;
+import com.goormTable.member.entity.Member;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -12,15 +12,24 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginDto {
-    private Long seq;
+    private int seq;
     private String adminId;
     private String password;
     private String companyId;
     private String adminYn;
     private LocalDateTime regTime;
-    public Login toLoginData() {
-        return Login.builder()
-                .seq(this.seq)
+    public Member toLoginData() {
+        return Member.builder()
+                .memberSeq(this.seq)
+                .adminId(this.adminId)
+                .password(this.password)
+                .companyId(this.companyId)
+                .adminYn(this.adminYn)
+                .regTime(this.regTime)
+                .build();
+    }
+    public Member toRegisterUser() {
+        return Member.builder()
                 .adminId(this.adminId)
                 .password(this.password)
                 .companyId(this.companyId)
