@@ -20,7 +20,7 @@ public class LoginController {
 
     @Operation(summary = "로그인", description = "사용자 로그인을 처리합니다.")
     @PostMapping("/login")
-    public ResponseEntity login(@RequestParam("id") String id, @RequestParam("password") String password) {
+    public ResponseEntity login(@RequestParam String id, @RequestParam String password) {
 
         return ResponseEntity.ok(loginService.chkAdmin(id,password));
     }
