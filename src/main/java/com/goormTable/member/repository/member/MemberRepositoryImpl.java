@@ -13,6 +13,6 @@ public class MemberRepositoryImpl implements MemberRepository {
 
     @Override
     public List<Member> findMemberByCompanyId(String companyId) {
-        return repository.findMemberByAdminIdEquals(companyId);
+        return repository.findMemberByCompanyIdEquals(companyId);
     }
 }

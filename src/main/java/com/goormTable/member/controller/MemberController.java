@@ -25,7 +25,7 @@ public class MemberController {
     @GetMapping("/admin") // admin?company_id=null&day=null
     public List<ReservationDto> findListByDate(
             @RequestParam("company_id") String companyId,
-            @RequestParam("day") @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") LocalDateTime day
+            @RequestParam @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") LocalDateTime day
     ){
         return memberService.findAllByCompanyIdAndDay(companyId, day);
     }
