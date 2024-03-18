@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+#companyId, #day {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#searchBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+#searchBtn:hover {
+    background-color: #0056b3;
+}
+
+#result ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#result li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-wait {
+    color: #d9534f;
+}
+
+.status-confirm, .status-call {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #5cb85c;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.status-call {
+    background-color: #f0ad4e;
+}
+
+/* 상태가 wait가 아닐 경우 confirm과 call 버튼 숨김 */
+.status-not-wait .status-confirm,
+.status-not-wait .status-call {
+    display: none;
+}
+#reservationsContainer {
+    max-width: 800px;
+    margin: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* 첫 번째 행 하이라이트 */
+tbody tr:first-child {
+    background-color: #ffffe0;
+}
+
+.status-wait {
+    font-weight: bold;
+    color: #FF4500;
+}
+
+.status-confirm, .status-call {
+    padding: 5px 10px;
+    margin-left: 5px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.status-confirm {
+    background-color: #28a745;
+}
+
+.status-call {
+    background-color: #007bff;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>구름테이블링 예약 시스템</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<!-- 설정 버튼 클릭 시 나타날 로그인 모달 -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>로그인</h2>
+        <input type="password" id="loginPassword" placeholder="비밀번호">
+        <button id="loginSubmit">로그인</button>
+    </div>
+</div>
+<h1>구름테이블링 예약 시스템</h1>
+<div class="settings-button-container">
+    <button id="settingsButton">설정</button>
+</div>
+
+<div>대기중인 고객 수: <span id="waitingCount">0</span>명</div>
+
+<form id="reservationForm">
+    <label for="phoneNum">전화번호:</label>
+    <input type="text" id="phoneNum" name="phoneNum" required>
+
+    <label for="peopleNum">인원 수:</label>
+    <input type="number" id="peopleNum" name="peopleNum" min="1" value="1" required>
+
+    <label for="extra">추가 요청사항:</label>
+    <select id="extra" name="extra">
+        <option value="">선택해주세요</option>
+        <option value="애기의자 필요">애기의자 필요</option>
+        <option value="창가 자리 원함">창가 자리 원함</option>
+        <option value="조용한 자리 원함">조용한 자리 원함</option>
+        <option value="기타 사항">기타 사항(직원에게 문의할게요)</option>
+    </select>
+
+    <button type="submit">예약하기</button>
+</form>
+
+<script>
+    $(document).ready(function() {
+        // 대기중인 고객 수 조회
+        function fetchWaitingCount() {
+            $.ajax({
+                url: '/waitingCnt', // 백엔드 서버 엔드포인트
+                type: 'GET',
+                success: function(data) {
+                    $('#waitingCount').text(data);
+                }
+            });
+        }
+        fetchWaitingCount(); // 페이지 로드 시 실행
+        // setInterval(fetchWaitingCount, 5000); // 5초마다 갱신 연동 후 테스트 필요
+
+        // 예약하기 폼 제출 처리
+        $('#reservationForm').submit(function(e) {
+            e.preventDefault();
+            var formData = {
+                phoneNum: $('#phoneNum').val(),
+                peopleNum: $('#peopleNum').val(),
+                extra: $('#extra').val()
+            };
+
+            $.ajax({
+                url: '/reserve', // 백엔드 서버 엔드포인트
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    alert('예약이 완료되었습니다.');
+                    fetchWaitingCount(); // 대기중인 고객 수 갱신
+                },
+                error: function() {
+                    alert('예약에 실패했습니다.');
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        // 설정 버튼 클릭 이벤트
+        $("#settingsButton").click(function() {
+            $("#loginModal").show(); // 로그인 모달 표시
+        });
+
+        // 모달 닫기 버튼 클릭 이벤트
+        $(".close").click(function() {
+            $("#loginModal").hide(); // 로그인 모달 숨김
+        });
+
+        // 로그인 폼 제출 이벤트
+        $("#loginSubmit").click(function() {
+            var password = $("#loginPassword").val(); // 비밀번호 값 가져오기
+
+            $.ajax({
+                url: '/login', // 로그인 처리 엔드포인트
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                data: {
+                    id: 'admin',
+                    password: password
+                },
+                success: function(response, textStatus, xhr) {
+                    // HTTP 상태 코드가 200인 경우
+                    if (xhr.status === 200) {
+                        window.location.href = '/reserList.html'; // 리다이렉션
+                    } else {
+                        alert("로그인 실패"); // 다른 상태 코드를 받은 경우
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // 요청 실패 처리
+                    alert("로그인 요청 실패");
+                }
+            });
+        });
+
+        // 모달 외부 클릭 시 모달 닫기
+        $(window).click(function(event) {
+            if ($(event.target).is("#loginModal")) {
+                $("#loginModal").hide();
+            }
+        });
+    });
+</script>
+</body>
+</html>

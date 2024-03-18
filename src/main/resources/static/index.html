@@ -44,15 +44,6 @@
 </head>
 <body>
 
-<!--<form action="/login" method="post">-->
-<!--    <h1>임시 화면입니다.</h1>-->
-<!--    <label for="id">ID:</label>-->
-<!--    <input type="text" id="id" name="id" required>-->
-<!--    <label for="password">Password:</label>-->
-<!--    <input type="password" id="password" name="password" required>-->
-<!--    <button type="submit">Login</button>-->
-<!--</form>-->
-
 <form id="loginForm">
     <h1>임시 화면입니다.</h1>
     <input type="text" id="id" name="id" required placeholder="ID">
@@ -79,7 +70,10 @@
                 success: function(response, textStatus, xhr) {
                     // HTTP 상태 코드가 200인 경우
                     if (xhr.status === 200) {
-                        window.location.href = '/reserList.html'; // 리다이렉션
+                        localStorage.setItem('companyId', response.companyId); // 로컬 스토리지에 저장
+                        // sessionStorage.setItem('companyId', response.companyId); // 세션 스토리지에 저장
+                        // document.cookie = "companyId=" + response.companyId + "; path=/; max-age=3600"; // 쿠키에 저장, 1시간 동안 유효
+                        window.location.href = '/main.html'; // 리다이렉션
                     } else {
                         alert("로그인 실패"); // 다른 상태 코드를 받은 경우
                     }

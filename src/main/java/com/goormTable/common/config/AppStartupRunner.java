@@ -25,6 +25,7 @@ public class AppStartupRunner implements CommandLineRunner {
     public void run(String...args) throws Exception {
 
         LoginDto loginDto = new LoginDto();
+        loginDto.setSeq(2);
         loginDto.setAdminId("admin");
         loginDto.setPassword("1234");
         loginDto.setCompanyId("Acafe1");
@@ -47,16 +48,16 @@ public class AppStartupRunner implements CommandLineRunner {
         String[] statuses = {"confirm", "wait", "call"};
 
         Random random = new Random();
-
+int ad =2;
         // 10개의 예약 데이터 생성
         for (int i = 0; i < 10; i++) {
             ReservationDto reservationDto = new ReservationDto();
-            reservationDto.setReservationTime(LocalDateTime.now().plusDays(random.nextInt(10)));
+            reservationDto.setReservationTime(LocalDateTime.now());
             reservationDto.setPeopleNum(random.nextInt(5) + 1);
             reservationDto.setPhoneNum("010-1234-" + (1000 + random.nextInt(9000)));
             reservationDto.setExtra(extras[random.nextInt(extras.length)]);
             reservationDto.setStatus(statuses[random.nextInt(statuses.length)]);
-            reservationDto.setMemberSeq(1);
+            reservationDto.setMemberSeq(ad);
 
             loginService.registerReservation(reservationDto);
         }

@@ -20,9 +20,15 @@ public class LoginController {
 
     @Operation(summary = "로그인", description = "사용자 로그인을 처리합니다.")
     @PostMapping("/login")
-    public ResponseEntity login(@RequestParam String id, @RequestParam String password) {
-
-        return ResponseEntity.ok(loginService.chkAdmin(id,password));
+    public ResponseEntity<?> login(@RequestParam String id, @RequestParam String password) {
+        ResponseEntity<?> response = loginService.chkAdmin(id, password);
+        if (response.getStatusCode().is2xxSuccessful()) {
+            // 로그인 성공
+            return response;
+        } else {
+            // 로그인 실패
+            return ResponseEntity.badRequest().body("로그인 실패: 아이디 또는 비밀번호를 확인해주세요.");
+        }
     }
 
     //TODO 마스터계정만 멤버(가게사장님)를 등록할수 있게 필요

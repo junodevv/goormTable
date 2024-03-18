@@ -2,6 +2,7 @@ package com.goormTable.login.service;
 
 import com.goormTable.login.dto.LoginDto;
 import com.goormTable.login.repository.LoginRepository;
+import com.goormTable.member.dto.MemberDto;
 import com.goormTable.member.dto.ReservationDto;
 import com.goormTable.member.entity.Member;
 import com.goormTable.member.entity.Reservation;
@@ -21,13 +22,17 @@ public class LoginService {
     private final SpringDataJpaReservationRepository reservationRepository;
     private final LoginRepository loginRepository;
     private final PasswordEncoder passwordEncoder;
-    public ResponseEntity chkAdmin(String id,String pw) {
+    public ResponseEntity<MemberDto> chkAdmin(String id,String pw) {
         Member checkAdmin = loginRepository.findByAdminIdAndAdminYn(id, "Y");
 
         if (checkAdmin != null && passwordEncoder.matches(pw, checkAdmin.getPassword())) {
-            return ResponseEntity.ok().build();
+            MemberDto memberDto = new MemberDto();
+            memberDto.setAdminId(checkAdmin.getAdminId());
+            memberDto.setCompanyId(checkAdmin.getCompanyId()); // 예시에서 username 필드에 adminId 값을 사용
+            memberDto.setAdminYn(checkAdmin.getAdminYn());
+            return ResponseEntity.ok(memberDto);
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.badRequest().body(null);
     }
     @Transactional
     public boolean registerUser(LoginDto loginDto){
