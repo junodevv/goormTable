@@ -6,6 +6,7 @@ import com.goormTable.member.dto.MemberDto;
 import com.goormTable.member.dto.ReservationDto;
 import com.goormTable.member.entity.Member;
 import com.goormTable.member.entity.Reservation;
+import com.goormTable.member.repository.member.SpringDataJpaMemberRepository;
 import com.goormTable.member.repository.reservation.SpringDataJpaReservationRepository;
 import jakarta.transaction.Transactional;
 import lombok.*;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class LoginService {
     private final SpringDataJpaReservationRepository reservationRepository;
+    private final SpringDataJpaMemberRepository memberRepository;
     private final LoginRepository loginRepository;
     private final PasswordEncoder passwordEncoder;
     public ResponseEntity<MemberDto> chkAdmin(String id,String pw) {
@@ -59,12 +61,17 @@ public class LoginService {
     }
     @Transactional
     public void registerReservation(ReservationDto reservationDto){
-        Reservation reservation= new Reservation();
-        reservation.setReservationTime(reservationDto.getReservationTime());
-        reservation.setPeopleNum(reservationDto.getPeopleNum());
-        reservation.setPhoneNum(reservationDto.getPhoneNum());
-        reservation.setExtra(reservationDto.getExtra());
-        reservation.setStatus(reservationDto.getStatus());
+        Member member = memberRepository.findById(Long.valueOf(reservationDto.getMemberSeq()))
+                .orElseThrow(() -> new RuntimeException("Member not found"));
+
+        Reservation reservation = Reservation.builder()
+                .reservationTime(reservationDto.getReservationTime())
+                .peopleNum(reservationDto.getPeopleNum())
+                .phoneNum(reservationDto.getPhoneNum())
+                .extra(reservationDto.getExtra())
+                .status(reservationDto.getStatus())
+                .member(member) // 조회한 Member 엔티티 설정
+                .build();
         reservationRepository.save(reservation);
 
     }

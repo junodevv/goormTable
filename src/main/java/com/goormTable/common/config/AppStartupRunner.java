@@ -48,7 +48,6 @@ public class AppStartupRunner implements CommandLineRunner {
         String[] statuses = {"confirm", "wait", "call"};
 
         Random random = new Random();
-int ad =2;
         // 10개의 예약 데이터 생성
         for (int i = 0; i < 10; i++) {
             ReservationDto reservationDto = new ReservationDto();
@@ -57,7 +56,7 @@ int ad =2;
             reservationDto.setPhoneNum("010-1234-" + (1000 + random.nextInt(9000)));
             reservationDto.setExtra(extras[random.nextInt(extras.length)]);
             reservationDto.setStatus(statuses[random.nextInt(statuses.length)]);
-            reservationDto.setMemberSeq(ad);
+            reservationDto.setMemberSeq(2);
 
             loginService.registerReservation(reservationDto);
         }

@@ -43,5 +43,11 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원가입 실패");
         }
     }
+    //TODO 로그아웃 기능 완성하기
+    @Operation(summary = "로그아웃", description = "로그아웃 처리합니다.")
+    @PostMapping("/logout")
+    public ResponseEntity logout() {
+            return ResponseEntity.ok("로그아웃 성공");
+    }
 
 }
