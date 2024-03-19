@@ -1,3 +1,4 @@
+/**
 package com.goormTable.common.config;
 
 import com.goormTable.login.dto.LoginDto;
@@ -65,3 +66,4 @@ int ad =2;
 
     }
 }
+ **/
