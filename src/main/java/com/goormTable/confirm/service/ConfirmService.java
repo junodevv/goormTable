@@ -16,7 +16,7 @@ public class ConfirmService {
 
     @Transactional
     public boolean  confirmUserStatus(String tel, int memberSeq) {
-        return confirmRepository.findByReserveSeqAndPhoneNum(memberSeq, tel)
+        return confirmRepository.findByMember_MemberSeqAndPhoneNum(memberSeq, tel)
                 .map(user -> {
                     user.setStatus("confirm");
                     confirmRepository.save(user);

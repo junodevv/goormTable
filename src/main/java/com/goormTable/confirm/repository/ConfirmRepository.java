@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface ConfirmRepository extends JpaRepository<Reservation, Integer> {
-    Optional<Reservation> findByReserveSeqAndPhoneNum(Integer reserveSeq, String phoneNum);
+    Optional<Reservation> findByMember_MemberSeqAndPhoneNum(Integer memberSeq, String phoneNum);
 }
