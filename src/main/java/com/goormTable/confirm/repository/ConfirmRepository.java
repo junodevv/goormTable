@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface ConfirmRepository extends JpaRepository<Reservation, Long> {
-    Optional<Reservation> findByTelAndSequence(String tel, int sequence);
+public interface ConfirmRepository extends JpaRepository<Reservation, Integer> {
+    Optional<Reservation> findByReserveSeqAndPhoneNum(Integer reserveSeq, String phoneNum);
 }

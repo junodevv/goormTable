@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,8 +20,9 @@ public class ConfirmController {
     private ConfirmService confirmService;
 
     @PostMapping("/admin/confirm")
-    public ResponseEntity<?> confirm(@Validated @RequestBody ConfirmRequest confirmRequest) {
-        boolean isConfirmed = confirmService.confirmUserStatus(confirmRequest.getTel(),confirmRequest.getSequence());
+    public ResponseEntity<?> confirm(@RequestParam String tel, @RequestParam int sequence, @RequestParam String status) {
+        // 여기서 status 파라미터를 사용하지 않는 것 같지만, 필요에 따라 로직에 추가할 수 있습니다.
+        boolean isConfirmed = confirmService.confirmUserStatus(tel, sequence);
         if(isConfirmed){
             return ResponseEntity.ok().build();
         }

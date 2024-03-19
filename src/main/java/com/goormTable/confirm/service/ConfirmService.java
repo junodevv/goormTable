@@ -15,15 +15,12 @@ public class ConfirmService {
     private ConfirmRepository confirmRepository;
 
     @Transactional
-    public boolean  confirmUserStatus(String tel, int sequence) {
-        Optional<Reservation> resevationOptional = confirmRepository.findByTelAndSequence(tel, sequence);
-        if (resevationOptional.isPresent()) {
-            Reservation reservation = resevationOptional.get();
-            reservation.setStatus("confirm");
-            confirmRepository.save(reservation); // 상태 변경을 데이터베이스에 반영
-            return true; // 성공적으로 상태 변경
-        } else {
-            return false; // 사용자를 찾지 못함
-        }
+    public boolean  confirmUserStatus(String tel, int memberSeq) {
+        return confirmRepository.findByReserveSeqAndPhoneNum(memberSeq, tel)
+                .map(user -> {
+                    user.setStatus("confirm");
+                    confirmRepository.save(user);
+                    return true; // 상태 변경 성공
+                }).orElse(false); // 해당 조건의 사용자를 찾지 못함
     }
 }
