@@ -15,6 +15,11 @@ public interface SpringDataJpaReservationRepository extends JpaRepository<Reserv
             "select r from Reservation as r "
              + "where r.member.memberSeq = :memberSeq "
              + "and DATE(r.reservationTime) = DATE(:date)"
+             + "order by (case r.status "
+                    + "        when 'call' then 1"
+                    + "        when 'wait' then 2"
+                    + "        else 3 "
+                    + "end), r.status asc, DATE(r.reservationTime) asc"
     )
     List<Reservation> findByMemberSeqAndReservationTime(
             @Param("memberSeq") Integer memberSeq,
