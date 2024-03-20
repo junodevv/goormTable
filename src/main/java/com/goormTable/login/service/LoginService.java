@@ -32,6 +32,7 @@ public class LoginService {
             memberDto.setAdminId(checkAdmin.getAdminId());
             memberDto.setCompanyId(checkAdmin.getCompanyId()); // 예시에서 username 필드에 adminId 값을 사용
             memberDto.setAdminYn(checkAdmin.getAdminYn());
+            memberDto.setMemberSeq(Long.valueOf(checkAdmin.getMemberSeq()));
             return ResponseEntity.ok(memberDto);
         }
         return ResponseEntity.badRequest().body(null);
