@@ -1,4 +1,4 @@
-/**
+
 package com.goormTable.common.config;
 
 import com.goormTable.login.dto.LoginDto;
@@ -65,4 +65,3 @@ public class AppStartupRunner implements CommandLineRunner {
 
     }
 }
- **/
