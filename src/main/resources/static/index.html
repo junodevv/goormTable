@@ -70,7 +70,9 @@
                 success: function(response, textStatus, xhr) {
                     // HTTP 상태 코드가 200인 경우
                     if (xhr.status === 200) {
+                        console.log(response);
                         localStorage.setItem('companyId', response.companyId); // 로컬 스토리지에 저장
+                        localStorage.setItem('seq',response.memberSeq);
                         // sessionStorage.setItem('companyId', response.companyId); // 세션 스토리지에 저장
                         // document.cookie = "companyId=" + response.companyId + "; path=/; max-age=3600"; // 쿠키에 저장, 1시간 동안 유효
                         window.location.href = '/main.html'; // 리다이렉션
