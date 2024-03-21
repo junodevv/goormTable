@@ -3,7 +3,10 @@ package com.goormTable.common.config;
 
 import com.goormTable.login.dto.LoginDto;
 import com.goormTable.login.service.LoginService;
+import com.goormTable.main.service.MainService;
 import com.goormTable.member.dto.ReservationDto;
+import com.goormTable.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,12 +16,15 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 @Component
+
 public class AppStartupRunner implements CommandLineRunner {
     private final LoginService loginService; // LoginService 인스턴스 주입
+    private final MainService mainService;
 
     @Autowired
-    public AppStartupRunner(LoginService loginService) {
+    public AppStartupRunner(LoginService loginService, MemberService memberService, MainService mainService) {
         this.loginService = loginService; // 생성자를 통한 의존성 주입
+        this.mainService = mainService;
     }
     private PasswordEncoder passwordEncoder;
 
@@ -59,7 +65,7 @@ public class AppStartupRunner implements CommandLineRunner {
             reservationDto.setStatus(statuses[random.nextInt(statuses.length)]);
             reservationDto.setMemberSeq(2);
 
-            loginService.registerReservation(reservationDto);
+            mainService.registerReservation(reservationDto);
         }
         System.out.println("-----서버 시작 시 예약 목록 로직이 실행-----");
 

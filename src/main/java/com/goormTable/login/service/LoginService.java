@@ -60,20 +60,20 @@ public class LoginService {
             return false;
         }
     }
-    @Transactional
-    public void registerReservation(ReservationDto reservationDto){
-        Member member = memberRepository.findById(Long.valueOf(reservationDto.getMemberSeq()))
-                .orElseThrow(() -> new RuntimeException("Member not found"));
-
-        Reservation reservation = Reservation.builder()
-                .reservationTime(reservationDto.getReservationTime())
-                .peopleNum(reservationDto.getPeopleNum())
-                .phoneNum(reservationDto.getPhoneNum())
-                .extra(reservationDto.getExtra())
-                .status(reservationDto.getStatus())
-                .member(member) // 조회한 Member 엔티티 설정
-                .build();
-        reservationRepository.save(reservation);
-
-    }
+//    @Transactional
+//    public void registerReservation(ReservationDto reservationDto){
+//        Member member = memberRepository.findById(Long.valueOf(reservationDto.getMemberSeq()))
+//                .orElseThrow(() -> new RuntimeException("Member not found"));
+//
+//        Reservation reservation = Reservation.builder()
+//                .reservationTime(reservationDto.getReservationTime())
+//                .peopleNum(reservationDto.getPeopleNum())
+//                .phoneNum(reservationDto.getPhoneNum())
+//                .extra(reservationDto.getExtra())
+//                .status(reservationDto.getStatus())
+//                .member(member) // 조회한 Member 엔티티 설정
+//                .build();
+//        reservationRepository.save(reservation);
+//
+//    }
 }

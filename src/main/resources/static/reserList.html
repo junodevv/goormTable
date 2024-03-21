@@ -66,7 +66,8 @@
                             '<td>' + reservation.extra + '</td>' +
                             '<td>' + reservation.status + '</td>' +
                             '<td>' +
-                            (reservation.status === 'wait' ? '<span class="status-confirm">Confirm</span><span class="status-call">Call</span>' : '') +
+                            (reservation.status === 'WAIT' ? '<span class="status-confirm">Confirm</span><span class="status-call">Call</span>' : '') +
+                            (reservation.status === 'CALL' ? '<span class="status-confirm">Confirm' : '') +
                             '</td>' +
                             '</tr>';
                     });

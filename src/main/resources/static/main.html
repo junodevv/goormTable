@@ -44,18 +44,32 @@
 
 <script>
     $(document).ready(function() {
+        var companyId = localStorage.getItem("companyId");
+
+
+
         // 대기중인 고객 수 조회
         function fetchWaitingCount() {
             $.ajax({
-                url: '/waitingCnt', // 백엔드 서버 엔드포인트
-                type: 'GET',
-                success: function(data) {
-                    $('#waitingCount').text(data);
+                url: "http://localhost:8080/waitingCnt", // 서버의 URL 주소
+                type: "GET",
+                data: {
+                    company_id: companyId // 파라미터로 companyId 전달
+                },
+                success: function(response) {
+                    console.log(response);
+                    // 서버로부터 응답 받음. 응답 구조에 따라 접근 방식이 달라질 수 있음
+                    // 예시는 response가 대기중인 고객 수를 직접 반환한다고 가정
+                    $("#waitingCount").text(response);
+                },
+                error: function(xhr, status, error) {
+                    // 오류 처리
+                    console.error("Error occurred: " + error);
                 }
             });
         }
         fetchWaitingCount(); // 페이지 로드 시 실행
-        // setInterval(fetchWaitingCount, 5000); // 5초마다 갱신 연동 후 테스트 필요
+        setInterval(fetchWaitingCount, 5000); // 5초마다 갱신 연동 후 테스트 필요
 
         // 예약하기 폼 제출 처리
         $('#reservationForm').submit(function(e) {
@@ -63,11 +77,13 @@
             var formData = {
                 phoneNum: $('#phoneNum').val(),
                 peopleNum: $('#peopleNum').val(),
-                extra: $('#extra').val()
+                extra: $('#extra').val(),
+                companyId : localStorage.getItem("companyId"),
+                memberSeq : localStorage.getItem("seq")
             };
 
             $.ajax({
-                url: '/reserve', // 백엔드 서버 엔드포인트
+                url: '/insReser', // 백엔드 서버 엔드포인트
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(formData),
