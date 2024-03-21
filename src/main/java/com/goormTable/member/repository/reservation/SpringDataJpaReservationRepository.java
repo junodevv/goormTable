@@ -19,7 +19,7 @@ public interface SpringDataJpaReservationRepository extends JpaRepository<Reserv
                     + "        when 'call' then 1"
                     + "        when 'wait' then 2"
                     + "        else 3 "
-                    + "end), r.status asc, DATE(r.reservationTime) asc"
+                    + "end), r.status asc, DATE(r.reservationTime) asc, r.reserveSeq asc"
     )
     List<Reservation> findByMemberSeqAndReservationTime(
             @Param("memberSeq") Integer memberSeq,
