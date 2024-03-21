@@ -3,6 +3,7 @@ package com.goormTable.main.service;
 import com.goormTable.member.dto.ReservationDto;
 import com.goormTable.member.entity.Member;
 import com.goormTable.member.entity.Reservation;
+import com.goormTable.member.entity.Status;
 import com.goormTable.member.repository.member.SpringDataJpaMemberRepository;
 import com.goormTable.member.repository.reservation.SpringDataJpaReservationRepository;
 import jakarta.transaction.Transactional;
@@ -27,7 +28,7 @@ public class MainService {
                 .peopleNum(reservationDto.getPeopleNum())
                 .phoneNum(reservationDto.getPhoneNum())
                 .extra(reservationDto.getExtra())
-                .status("WAIT")
+                .status(Status.WAIT.getSmallValue())
                 .member(member)
                 .build();
 
