@@ -22,13 +22,12 @@ public class MainService {
     public ResponseEntity registerReservation(ReservationDto reservationDto){
         Member member = memberRepository.findById(Long.valueOf(reservationDto.getMemberSeq()))
                 .orElseThrow(() -> new RuntimeException("Member not found"));
-
         Reservation reservation = Reservation.builder()
                 .reservationTime(LocalDateTime.now())
                 .peopleNum(reservationDto.getPeopleNum())
                 .phoneNum(reservationDto.getPhoneNum())
                 .extra(reservationDto.getExtra())
-                .status(reservationDto.getStatus())
+                .status(Status.WAIT.getSmallValue())
                 .member(member)
                 .build();
 

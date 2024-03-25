@@ -5,7 +5,9 @@ import com.goormTable.login.dto.LoginDto;
 import com.goormTable.login.service.LoginService;
 import com.goormTable.main.service.MainService;
 import com.goormTable.member.dto.ReservationDto;
+import com.goormTable.member.entity.Status;
 import com.goormTable.member.service.MemberService;
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -52,7 +54,9 @@ public class AppStartupRunner implements CommandLineRunner {
                 "휠체어를 사용하는데 문제 없나요?"
         };
 
-        String[] statuses = {"confirm", "wait", "call"};
+        String[] statuses = Arrays.stream(Status.values())
+                .map(Status::getSmallValue)
+                .toArray(String[]::new);
 
         Random random = new Random();
         // 10개의 예약 데이터 생성
