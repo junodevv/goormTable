@@ -28,7 +28,7 @@ public class MainService {
                 .peopleNum(reservationDto.getPeopleNum())
                 .phoneNum(reservationDto.getPhoneNum())
                 .extra(reservationDto.getExtra())
-                .status(Status.WAIT.getSmallValue())
+                .status(reservationDto.getStatus())
                 .member(member)
                 .build();
 
